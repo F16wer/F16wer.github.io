@@ -1,0 +1,45 @@
+/* APlayer侧边栏进度条修复 - 终极版 */
+
+/* 1. 强制进度条高度和可交互性 */
+.aplayer .aplayer-bar {
+  height: 10px !important;           /* 进度条高度（6px易拖动） */
+  cursor: pointer !important;       /* 鼠标变成手型 */
+  pointer-events: auto !important;  /* 确保可点击 */
+  background: #e0e0e0 !important;   /* 背景色，方便看到 */
+}
+
+/* 2. 进度条填充部分 */
+.aplayer .aplayer-bar .aplayer-loaded,
+.aplayer .aplayer-bar .aplayer-played {
+  height: 6px !important;
+}
+
+/* 3. 拖动按钮 - 最关键！ */
+.aplayer .aplayer-bar .aplayer-thumb {
+  width: 14px !important;           /* 按钮大小 */
+  height: 14px !important;
+  background: #ffffff !important;   /* 白色按钮 */
+  border: 2px solid #00b9f1 !important; /* 主题色边框 */
+  border-radius: 50% !important;    /* 圆形 */
+  box-shadow: 0 0 8px rgba(0,0,0,0.3) !important;
+  margin-top: -10px !important;     /* 垂直居中 */
+  opacity: 0;                       /* 默认隐藏 */
+  transition: opacity 0.3s ease;    /* 平滑动画 */
+  pointer-events: auto !important;  /* 确保可拖动 */
+}
+
+/* 鼠标悬浮时显示拖动按钮 */
+.aplayer .aplayer-bar:hover .aplayer-thumb {
+  opacity: 1 !important;            /* 悬浮显示 */
+}
+
+/* 4. 防止主题冲突 */
+.aplayer * {
+  pointer-events: auto !important;
+}
+
+/* 5. 侧边栏宽度保护 */
+.aplayer-container {
+  min-width: 220px !important;      /* 确保足够空间 */
+  padding: 0 10px;                  /* 留边距 */
+}
