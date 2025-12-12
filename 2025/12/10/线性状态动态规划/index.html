@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 算法 | Hexo</title>
+  <title>线性状态动态规划 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E7%AE%97%E6%B3%95/index.html">
+  <meta name="description" content="我们聊聊动态规划最常见的一类题型——线性状态动态规划一般而言，线性状态最为直观，容易用DAG表示，所以构造状态时常优先考虑线性状态。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性状态动态规划">
+<meta property="og:url" content="http://example.com/2025/12/10/%E7%BA%BF%E6%80%A7%E7%8A%B6%E6%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我们聊聊动态规划最常见的一类题型——线性状态动态规划一般而言，线性状态最为直观，容易用DAG表示，所以构造状态时常优先考虑线性状态。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-10T09:03:39.000Z">
+<meta property="article:modified_time" content="2025-12-12T15:27:57.828Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary">
   
   
@@ -185,37 +191,95 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-线性状态动态规划" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class=" article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      线性状态动态规划
+    </h1>
+  
+
+  
+  
+	
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+				<i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
 <a href="/2025/12/10/%E7%BA%BF%E6%80%A7%E7%8A%B6%E6%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="archive-article-date">
   	<time datetime="2025-12-10T09:03:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-12-10</time>
 </a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/12/10/%E7%BA%BF%E6%80%A7%E7%8A%B6%E6%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">线性状态动态规划</a>
-    </h1>
+  </header>
   
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>我们聊聊动态规划最常见的一类题型——线性状态动态规划<br>一般而言，线性状态最为直观，容易用DAG表示，所以构造状态时常优先考虑线性状态。</p>
+<span id="more"></span>
+<p>I am back！<br>因为招新赛时间又敲定了在12&#x2F;14.<br>我其实有点犹豫要不要去，反正这学期都没什么比赛了下学期进也没什么。<br>思来想去还是决定给本学期的复健小小划个句号吧。</p>
+<p>笔者窃以为自己在图的入门部分的讲解很精彩，但考虑时间问题，动态规划部分均以题为主，讲解为辅。</p>
+<p>本篇文章仅作为个人学习记录用，多有借鉴《深入浅出程序设计竞赛》————提高篇。</p>
+<h2 id="单序列问题"><a href="#单序列问题" class="headerlink" title="单序列问题"></a>单序列问题</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1020">P1020 [NOIP 1999 提高组] 导弹拦截</a><br>一道很经典的“子序列提取”模型，<br>可以用线性状态表示：<br>对第一问（寻找最长不升子序列）记f<sub>i</sub>为以第i个数结尾的只考虑前i个数的子序列的长度。<br>    则在更新f[i]时，枚举f[1]-f[i-1]中符合条件的那些即可。<br>对第二问（找最长上升子序列长度）我们发现其实改改条件，能直接用第一问的思路。</p>
+<p>（注：本题在洛谷上数据有限制，需要优化至nlogn 请读者自行完成）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 100100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> ans,a[maxn],f[maxn],n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(cin &gt;&gt; a[++n]);</span><br><span class="line">	n--;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">		f[i] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; i ; j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j] &gt;= a[i])&#123;</span><br><span class="line">				f[i] = <span class="built_in">max</span>(f[i],f[j] + <span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		ans = <span class="built_in">max</span>(ans,f[i]);</span><br><span class="line">	&#125;<span class="comment">//找最大不降序列 </span></span><br><span class="line">	</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">		f[i] = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ans = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">		f[i] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span> ; j &lt; i ; j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j] &lt; a[i])&#123;</span><br><span class="line">				f[i] = <span class="built_in">max</span>(f[i] , f[j] + <span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		ans = <span class="built_in">max</span>(ans,f[i]); </span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
 
-        <div class="article-info info-on-right">
-          
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2285">P2285 [HNOI2004] 打鼹鼠</a><br>把所有鼠按时间排序，只需要找子序列，使得相邻两个鼠的曼哈顿距离不超过时间即可，注意到转移的判定只取决于相邻两个元素中，我们可以对上题如法炮制。<br>记f<sub>i</sub>为只考虑前i只，且确定打了第i只的情况下最多能打多少只。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxm 10010</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n,m,ans;</span><br><span class="line"><span class="type">int</span> f[maxm],t[maxm],x[maxm],y[maxm];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m ; i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;t[i],&amp;x[i],&amp;y[i]);</span><br><span class="line">		f[i] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span> ; j &lt; i ; j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(f[j] + <span class="number">1</span> &gt; f[i] &amp;&amp; <span class="built_in">abs</span>(x[i] - x[j]) + <span class="built_in">abs</span>(y[i] - y[j]) &lt;= t[i] - t[j])&#123;</span><br><span class="line">				f[i] = f[j] + <span class="number">1</span>;</span><br><span class="line">			&#125;<span class="comment">//abs为取绝对值 </span></span><br><span class="line">		&#125;</span><br><span class="line">		ans = <span class="built_in">max</span>(ans,f[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+比较两题解法，可以总结出“子序列提取”的常规思路：考虑新加入的数和前面某每个状态的关系和转移可行性
+
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1725">P1725 琪露诺</a><br>套路！我们只需要多考虑一个转移的位置限制便可轻松设计出和此前大差不差的状态转移。<br>但超时了。观察题目发现，我们总是在一个限定的区间进行转移（滑动窗口）————考虑单调队列！<br>（注：一些基本的技巧笔者也忘得比较多了，边做边学吧，会考虑专门更新）<br>这里附上自认为讲得很好的单调队列文章<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/xrx28e6s">朝花中学OI队的奋斗历程——浅谈单调队列</a>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 200010</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> inf 21000000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n,l,r;</span><br><span class="line"><span class="type">int</span> a[maxn],f[maxn],q[maxn];</span><br><span class="line"><span class="comment">//f[i]表示从起点到i的最大数字和</span></span><br><span class="line"><span class="comment">//q存储从f[i-r]到f[i-l]之间的单调性信息，保存下标 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; l &gt;&gt; r;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">		cin &gt;&gt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> head = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> tail = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> ans = -inf;</span><br><span class="line">	f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">		f[i] = -inf;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = l ; i &lt;= n ; i++)&#123;<span class="comment">//1到i-l都遇不到</span></span><br><span class="line">		<span class="keyword">while</span>(head &lt; tail &amp;&amp; f[i - l] &gt;= f[q[tail - <span class="number">1</span>]])&#123;</span><br><span class="line">			tail--;</span><br><span class="line">		&#125;<span class="comment">//删除不比f[i - l]大、还比f[i - l]考前的数 </span></span><br><span class="line">		q[tail++] = i - l;</span><br><span class="line">		<span class="keyword">while</span>(head &lt; tail &amp;&amp; q[head] &lt; i - r)&#123;</span><br><span class="line">			head++;</span><br><span class="line">		&#125;<span class="comment">//删除过期数据</span></span><br><span class="line">		f[i] = f[q[head]] + a[i];</span><br><span class="line">		<span class="keyword">if</span>(i + r &gt; n)&#123;</span><br><span class="line">			ans = <span class="built_in">max</span>(ans,f[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4933">P4933 大师</a><br>虽然形式上是计数问题，其本质仍旧没变。<br>不过我们需要考虑公差这一数据。<br>记f<sub>i,d</sub>为以第i个数结尾的公差为d的子序列的个数（我们需要考虑实际上公差不会那么密，可以采用a[i]-a[j]的方式算公差）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 1010</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxv 20010</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 998244353</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> f[maxn][maxv * <span class="number">2</span>],n,a[maxn],ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">		cin &gt;&gt; a[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span> ; j &lt; i ; j++)&#123;</span><br><span class="line">			(f[i][a[i] - a[j] + maxv] += f[j][a[i] - a[j] + maxv] + <span class="number">1</span>) %= mod;</span><br><span class="line">			(ans += f[j][a[i] - a[j] + maxv] + <span class="number">1</span>) %= mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;<span class="comment">//这个数组处理是为了防止负数</span></span><br><span class="line">	cout &lt;&lt; (ans + n) % mod;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="多序列问题"><a href="#多序列问题" class="headerlink" title="多序列问题"></a>多序列问题</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2758">P2758 编辑距离</a><br>按照线性状态动态规划的方程的一般表示方法，可以采用f<sub>i,j</sub>表示将字符串a前i个字符转化成字符串b前j个字符的最少操作次数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 2010</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n,f[maxn][maxn];</span><br><span class="line">string a,b;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">	<span class="type">int</span> n = a.<span class="built_in">length</span>();</span><br><span class="line">	<span class="type">int</span> m = b.<span class="built_in">length</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">		f[i][<span class="number">0</span>] = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span> ; i &lt;= m ; i++)&#123;</span><br><span class="line">		f[<span class="number">0</span>][i] = i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n ; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span> ; j &lt;= m ; j++)&#123;</span><br><span class="line">			f[i][j] = <span class="built_in">min</span>(<span class="built_in">min</span>(f[i - <span class="number">1</span>][j] + <span class="number">1</span>,f[i][j - <span class="number">1</span>] + <span class="number">1</span>) ,</span><br><span class="line">				f[i<span class="number">-1</span>][j<span class="number">-1</span>] + (a[i - <span class="number">1</span>] != b [j<span class="number">-1</span>]));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; f[n][m] &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<br>
+
+<p>先到这里吧，作者要更别的内容去了 886。<br>本文章最后一次更新：2025&#x2F;12&#x2F;12 23：27</p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:;" class="page-reward-btn tooltip-top">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>冰醇茶饮真的很好喝<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/images/Weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -231,191 +295,141 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/12/10/%E7%BA%BF%E6%80%A7%E7%8A%B6%E6%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2025/11/23/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8/" class="archive-article-date">
-  	<time datetime="2025-11-23T15:56:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-11-23</time>
-</a>
+  
+    <a href="/2025/12/05/%E8%BF%91%E6%9C%9F%E5%AE%89%E6%8E%92/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">近期安排</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/11/23/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8/">动态规划入门</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">单序列问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">多序列问题</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2025/11/18/%E5%9B%BE%E8%AE%BA%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E4%B8%8E%E9%87%8D%E5%BF%83/" class="archive-article-date">
-  	<time datetime="2025-11-18T05:17:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-11-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/11/18/%E5%9B%BE%E8%AE%BA%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84%E4%B8%8E%E9%87%8D%E5%BF%83/">图论——树的直径与重心</a>
-    </h1>
-  
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
+<!-- 多说评论系统 -->
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2025/11/15/%E5%9B%BE%E8%AE%BA%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E5%85%A5%E9%97%A8/" class="archive-article-date">
-  	<time datetime="2025-11-15T07:48:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-11-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/11/15/%E5%9B%BE%E8%AE%BA%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E5%85%A5%E9%97%A8/">图论——树的入门</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<!-- 网易云评论系统 -->
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2025/11/06/%E5%9B%BE%E7%9A%84%E5%85%A5%E9%97%A8/" class="archive-article-date">
-  	<time datetime="2025-11-06T05:57:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-11-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/11/06/%E5%9B%BE%E7%9A%84%E5%85%A5%E9%97%A8/">图的入门</a>
-    </h1>
-  
+<!-- 畅言评论系统 -->
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
+<!-- disqus评论系统 -->
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+<!-- gitment评论系统 -->
+
+
+<!-- valine评论系统 -->
+
+
+<!-- twikoo评论系统 -->
+
+<div id="tcomment"></div>
+<script src="https://cdn.staticfile.org/twikoo/1.5.11/twikoo.all.min.js"></script>
+<script>
+twikoo.init({
+  envId: 'https://subtle-gumdrop-e9f71e.netlify.app/.netlify/functions/twikoo', // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+  el: '#tcomment', // 容器元素
+  // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
+  // path: location.pathname, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+  // lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/imaegoo/twikoo/blob/main/src/js/utils/i18n/index.js
+})
+</script>
+
 
 
           </div>
@@ -452,9 +466,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
